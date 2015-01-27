@@ -17,7 +17,7 @@ function keychain_fn {
     # export KEYCHAIN_PASSPHRASE="$(cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
 
     # Create the keychain
-    if [ ! -f "${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH}"] ; then
+    if [ ! -f "${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH}" ] ; then
     	print_and_do_command_exit_on_error security -v create-keychain -p "${KEYCHAIN_PASSPHRASE}" "${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH}"
     fi
 
