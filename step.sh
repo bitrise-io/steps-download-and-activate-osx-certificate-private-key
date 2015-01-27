@@ -22,11 +22,11 @@ function keychain_fn {
     fi
 
     # Unlock keychain
-    print_and_do_command_exit_on_error security -v set-keychain-settings -lut 72000 "${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH}"
     print_and_do_command_exit_on_error security -v list-keychains -s "${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH}"
     print_and_do_command_exit_on_error security -v list-keychains
-    print_and_do_command_exit_on_error security -v default-keychain -s "${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH}"
     print_and_do_command_exit_on_error security -v unlock-keychain -p "${KEYCHAIN_PASSPHRASE}" "${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH}"
+    print_and_do_command_exit_on_error security -v set-keychain-settings -lut 72000 "${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH}"
+    print_and_do_command_exit_on_error security -v default-keychain -s "${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH}"
 
     # Import to keychain
     print_and_do_command_exit_on_error security -v import "${CERTIFICATE_PATH}" -k "${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH}" -P "${STEP_CERT_ACTIVATOR_CERTIFICATE_PASSPHRASE}" -A
