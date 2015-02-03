@@ -1,6 +1,10 @@
 name: "Certificate Private Key Activator"
 description: |
   Downloads and activates a .p12 certificate private key file.
+
+  You can import into the *login* keychain (default) or specify
+  a brand new keychain which will be created before the
+  certificate private key import is performed.
 website: https://github.com/bitrise-io/steps-download-and-activate-osx-certificate-private-key
 fork_url: https://github.com/bitrise-io/steps-download-and-activate-osx-certificate-private-key
 source:

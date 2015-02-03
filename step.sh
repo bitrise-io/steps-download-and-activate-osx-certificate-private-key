@@ -5,8 +5,30 @@ THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "${THIS_SCRIPT_DIR}/bash_utils/utils.sh"
 source "${THIS_SCRIPT_DIR}/bash_utils/formatted_output.sh"
 
-# init / cleanup the formatted output
-echo "" > "${formatted_output_file_path}"
+# init the formatted output
+echo "" >> "${formatted_output_file_path}"
+
+# ------------------------------
+# --- Error Cleanup
+
+function finalcleanup {
+  echo "-> finalcleanup"
+  local fail_msg="$1"
+
+  write_section_to_formatted_output "# Error"
+  if [ ! -z "${fail_msg}" ] ; then
+    write_section_to_formatted_output "**Error Description**:"
+    write_section_to_formatted_output "${fail_msg}"
+  fi
+  write_section_to_formatted_output "*See the logs for more information*"
+}
+
+function CLEANUP_ON_ERROR_FN {
+  local err_msg="$1"
+  finalcleanup "${err_msg}"
+}
+set_error_cleanup_function CLEANUP_ON_ERROR_FN
+
 
 # ------------------------------
 # --- Utils - Keychain
@@ -62,5 +84,10 @@ keychain_fn "add"
 
 
 # Get identities from certificate
-export CERTIFICATE_IDENTITY=$(security find-certificate -a ${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH} | grep -Ei '"labl"<blob>=".*"' | grep -oEi '=".*"' | grep -oEi '[^="]+' | head -n 1)
-echo "CERTIFICATE_IDENTITY: $CERTIFICATE_IDENTITY"
+identity_from_cert=$(security find-certificate -a ${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH} | grep -Ei '"labl"<blob>=".*"' | grep -oEi '=".*"' | grep -oEi '[^="]+' | head -n 1)
+
+write_section_to_formatted_output "# Success"
+write_section_to_formatted_output "Certificate Activated"
+echo_string_to_formatted_output "* Identity: ${identity_from_cert}"
+echo_string_to_formatted_output "* Keychain: ${STEP_CERT_ACTIVATOR_KEYCHAIN_PATH}"
+echo_string_to_formatted_output "* Certificate stored to file: ${CERTIFICATE_PATH}"
