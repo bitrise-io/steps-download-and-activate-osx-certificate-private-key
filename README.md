@@ -1,5 +1,12 @@
-# steps-download-and-activate-osx-certificate-private-key
+# Download and Activate OSX Cerfificate Private Key
+
+The new Download and Activate OSX Cerfificate Private Key step.
 
 Downloads and activates a .p12 certificate private key file
 
-**Work in progress**
+Can be run directly with the [bitrise CLI](https://github.com/bitrise-io/bitrise),
+just `git clone` this repository, `cd` into it's folder in your Terminal/Command Line
+and call `bitrise run test`.
+
+*Check the `bitrise.yml` file for required inputs which have to be
+added to your `.bitrise.secrets.yml` file!*

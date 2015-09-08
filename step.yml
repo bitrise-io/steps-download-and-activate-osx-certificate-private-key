@@ -1,4 +1,5 @@
-name: "Certificate Private Key Activator"
+title: "Certificate Private Key Activator"
+summary: ""
 description: |
   Downloads and activates a .p12 certificate private key file.
 
@@ -6,44 +7,58 @@ description: |
   a brand new keychain which will be created before the
   certificate private key import is performed.
 website: https://github.com/bitrise-io/steps-download-and-activate-osx-certificate-private-key
-fork_url: https://github.com/bitrise-io/steps-download-and-activate-osx-certificate-private-key
-source:
-  git: https://github.com/bitrise-io/steps-download-and-activate-osx-certificate-private-key.git
+source_code_url: https://github.com/bitrise-io/steps-download-and-activate-osx-certificate-private-key
+support_url: https://github.com/bitrise-io/steps-download-and-activate-osx-certificate-private-key/issues
 host_os_tags:
   - "osx-10.10"
+project_type_tags: []
+type_tags: []
 is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+dependencies: []
+run_if: ""
 inputs:
-  - 
-    mapped_to: STEP_CERT_ACTIVATOR_CERTIFICATE_URL
-    title: "Certificate Private Key file URL"
-    description: |
-      .p12 Private Key file's URL
-    is_required: true
-    is_expand: true
-  - 
-    mapped_to: STEP_CERT_ACTIVATOR_CERTIFICATE_PASSPHRASE
-    title: "Certificate Private Key file Passphrase"
-    description: |
-      .p12 Private Key file's Passphrase
-    is_required: false
-    is_expand: true
-  -
-    mapped_to: STEP_CERT_ACTIVATOR_CERTIFICATES_DIR
-    title: "Certificates Directory Path"
-    description: |
-      Directory where this step stores the Certificate Private Key (.p12).
-    value: "${HOME}/cert_activator_certs"
-    is_expand: true
-    is_required: true
-  -
-    mapped_to: STEP_CERT_ACTIVATOR_KEYCHAIN_PATH
-    title: "Keychain Path"
-    value: "${HOME}/Library/Keychains/login.keychain"
-    is_expand: true
-    is_required: true
-  -
-    mapped_to: STEP_CERT_ACTIVATOR_KEYCHAIN_PSW
-    title: "Keychain Password / passphrase"
-    is_expand: false
-    is_required: true
-
+  - certificate_url: ""
+    opts:
+      title: "Certificate Private Key file URL"
+      summary: ""
+      description: |-
+        .p12 Private Key file's URL
+      is_required: true
+      is_expand: true
+      is_dont_change_value: false
+  - certificate_passphrase: ""
+    opts:
+      title: "Certificate Private Key file Passphrase"
+      summary: ""
+      description: |-
+        .p12 Private Key file's Passphrase
+      is_required: false
+      is_expand: true
+      is_dont_change_value: false
+  - certificate_dir: "${HOME}/cert_activator_certs"
+    opts:
+      title: "Certificates Directory Path"
+      summary: ""
+      description: |-
+        Directory where this step stores the Certificate Private Key (.p12).
+      is_expand: true
+      is_required: true
+      is_dont_change_value: false
+  - keychain_path: "${HOME}/Library/Keychains/login.keychain"
+    opts:
+      title: "Keychain Path"
+      summary: ""
+      description: ""
+      is_expand: true
+      is_required: true
+      is_dont_change_value: false
+  - keychain_psw: ""
+    opts:
+      title: "Keychain Password / passphrase"
+      summary: ""
+      description: ""
+      is_expand: false
+      is_required: true
+      is_dont_change_value: false
